@@ -1,0 +1,16 @@
+.hf{
+    height: 89vh;
+} 
+.bgtx{
+    font-size: 80px;
+}
+.bgimg{
+    background-image: url("https://media.jimco.com/wp-content/uploads/2021/06/17132648/shutterstock_618880562-scaled.jpg");
+    /* background-blend-mode: color-burn; */
+}
+
+.bfx{
+border-radius: 40px;
+border: 1px solid rgb(245, 222, 179);
+background-color: rgba(26, 25, 26, 0.94);
+}
