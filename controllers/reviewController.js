@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongodb');
 const reviewService = require('../services/reviewService');
 
 // Get all reviews
@@ -14,7 +13,7 @@ const insertReview = (req, res) => {
 // Delete review
 const deleteReview = (req, res) => {
   const { id } = req.params;
-  reviewService.remove(ObjectId(id), res);
+  reviewService.remove(id, res);
 };
 
 module.exports = {

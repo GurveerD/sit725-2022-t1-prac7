@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongodb');
 const accountService = require('../services/accountService');
 
 // Get all accounts
@@ -14,7 +13,7 @@ const insertAccount = (req, res) => {
 // Delete account
 const deleteAccount = (req, res) => {
   const { id } = req.params;
-  accountService.remove(ObjectId(id), res);
+  accountService.remove(id, res);
 };
 
 // Authenticate account

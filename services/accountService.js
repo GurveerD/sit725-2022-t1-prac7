@@ -55,6 +55,7 @@ const auth = (credentials, res) => {
       }
       res.json({
         success: true,
+        message:'Login Successful',
         account: result,
       });
     },
