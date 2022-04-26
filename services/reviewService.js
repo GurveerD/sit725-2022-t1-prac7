@@ -1,6 +1,6 @@
 const { mongoClient } = require('./db');
 
-const accountCollection = mongoClient.db('techrev').collection('users');
+const reviewCollection = mongoClient.db('techrev').collection('reviews');
 
 // Get all reviews
 const getAll = (res) => {
@@ -20,7 +20,7 @@ const getAll = (res) => {
       }
       res.json({
         success: true,
-        message: 'Your message has been sent!',
+        message: 'Your review has been posted!',
       });
     });
   };

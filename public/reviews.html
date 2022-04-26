@@ -15,7 +15,7 @@
 
     <title>TechRev|Reviews</title>
   </head>
-  <body class="">
+  <body class="" onload="checkLogin()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <div class="logo">
@@ -38,14 +38,13 @@
             <a class="nav-link active" href="/reviews.html">Reviews</a>
             <a class="nav-link" href="/login.html">Login</a>
             <a class="nav-link" href="/signup.html">Sign up</a>
+            <div id="logout"></div>
           </div>
         </div>
       </div>
     </nav>
     <main class="container">
-      <button type="button" class="btn btn-warning mt-4 fs-4 rounded-3" id="addBtn" data-bs-toggle="modal" data-bs-target="#modal">
-        Write a review
-      </button>
+      <div id="reviewBtn"></div>
       <div class="modal fade" id="modal">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -57,12 +56,12 @@
               <div class="modal-body">
                 <div class="mb-3">
                   <label for="reviewTitle" class="col-form-label">Review Title:</label>
-                  <input type="text" name="title" id="reviewTitle" class="form-control" />
+                  <input type="text" name="title" id="reviewTitle" required class="form-control" />
                 </div>
                 <div class="mb-3">
-                  <label for="category" class="col-form-label">Category:</label>
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Select an Item</option>
+                  <label for="category"  class="col-form-label">Category:</label>
+                  <select class="form-select" name="category" required >
+                    <option value="">Select an Item</option>
                     <option value="laptop">Laptop</option>
                     <option value="phone">Phone</option>
                     <option value="speaker">Speaker</option>
@@ -72,55 +71,37 @@
                 </div>
                 <div class="mb-3">
                   <label for="productName" class="col-form-label">Product Name:</label>
-                  <input type="text" name="productName" id="productName" class="form-control" />
+                  <input type="text" name="productName" id="productName" required class="form-control" />
                 </div>
                 <div class="mb-3">
                   <label for="price" class="col-form-label">Price:</label>
-                  <input type="number" name="price" id="price" class="form-control" />
+                  <input type="number" name="price" id="price" required class="form-control" />
                 </div>
                 <div class="mb-3">
                   <label for="imgUrl" class="col-form-label">Image Url:</label>
-                  <input type="url" name="imgUrl" id="imgUrl" class="form-control" />
+                  <input type="url" name="imgUrl" id="imgUrl" required class="form-control" />
                 </div>
                 <div class="mb-3">
                   <div class="form-floating">
-                    <textarea class="form-control" name="review" id="review" style="height: 200px"></textarea>
+                    <textarea class="form-control" name="review" id="review" required style="height: 200px"></textarea>
                     <label for="floatingTextarea2">Comments</label>
                   </div>
                 </div>
+                <input type="hidden" name="postedBy" value="" id="postedBy">
+                <input type="hidden" name="createdAt" value="" id="createdAt">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Post Review</button>
+                <button type="submit" class="btn btn-success">Post Review</button>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div class="d-flex align-items-center flex-column" id="reviewCards">
 
-        <div class="card rounded-3  border shadow mb-3" style="max-width: 800px;">
-          <div class="card-header"><span class="fs-3"><strong> Review By: Someone Somewhere</strong></span></div>
-          <div class="row g-0">
-            <div class="col-md-12">
-              <img src="https://images.prismic.io/frameworkmarketplace/cca31de3-3b75-4932-af96-7646b7eba6c7__DSC3630-Edit-cropped.jpg?auto=compress,format" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-12">
-              <div class="card-body">
-                <h5 class="card-title fs-3">Best Budget Laptop</h5>
-                <p class="card-title"><b>Product Name: </b>Apple M1 Mac pro </p>
-                <p class="card-title"><b>Category: </b>Laptop</p>
-                <p class="card-title"><b>Price: </b>1299.00 $</p>
-                <p class="card-title fs-4"><b>Review:</b></p>
-                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio saepe nostrum quam nam! Necessitatibus amet sequi ut, magni esse incidunt quis aliquid dicta rerum laboriosam mollitia. Illo reiciendis itaque officiis harum praesentium sequi, aut amet recusandae ipsum accusamus in eius ab quisquam, expedita dignissimos corporis ullam ut qui. Illum distinctio nulla consectetur quidem magni officiis modi odio ex, animi vero placeat illo temporibus, quibusdam commodi sed dolorem sequi quo similique?</p>
-                <p class="card-text"><small class="text-muted">Posted on: 21/01/2020</small></p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="mt-4 d-flex align-items-center flex-column" id="reviewCards">
+        
       </div>
-
-
     </main>
 
     <script

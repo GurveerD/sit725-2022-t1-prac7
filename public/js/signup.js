@@ -7,7 +7,7 @@ document.getElementById("form").onsubmit = (event) => {
   event.preventDefault();
 
   // To make a post request with the details
-  fetch("/api/users", {
+  fetch("/api/account", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,8 +23,10 @@ document.getElementById("form").onsubmit = (event) => {
   .then((data) => {
     alert(data.message);
     event.target.reset();
+    window.location='login.html';
   })
   .catch((error) => {
     alert(error.message);
   });
 };
+console.log("backend connected");

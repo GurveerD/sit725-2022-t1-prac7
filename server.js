@@ -2,54 +2,19 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
+// For the public route 
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 
-const { MongoClient } = require("mongodb");
-const MONGODB_URI = "mongodb+srv://user1:mongo%40123@hades.5ef5z.mongodb.net/techrev?retryWrites=true&w=majority";
+//Middleware to parse the body for post requests
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-// to make a mongodb client
-const mongoClient = new MongoClient(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+//Routing 
+app.use('/api/account', require('./routes/account'));
+app.use('/api/review', require('./routes/review'));
 
-// connect to the mongodb database
-mongoClient.connect((err) => {
-  if (err) throw err;
-  console.log("Database connected");
-});
-
-// To Post to users collection
-let usersCollection;
-app.post("/api/users", (req, res) => {
-  usersCollection = mongoClient.db("techrev").collection("users");
-  usersCollection.insertOne(req.body, (err) => {
-    if (err) {
-      return res.status(500).json({ message: err.message });
-    }
-    res.json({
-      success: true,
-      message: "Your account has been created",
-    });
-  });
-});
-
-// To Post to reviews collection
-let reviewsCollection;
-app.post("/api/reviews", (req, res) => {
-  usersCollection = mongoClient.db("techrev").collection("reviews");
-  usersCollection.insertOne(req.body, (err) => {
-    if (err) {
-      return res.status(500).json({ message: err.message });
-    }
-    res.json({
-      success: true,
-      message: "Your review has been posted",
-    });
-  });
-});
-
+// Running the server
 const port = 8080;
 app.listen(port, () => {
   console.log("Running on port: " + port);
