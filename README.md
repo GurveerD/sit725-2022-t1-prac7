@@ -1,5 +1,5 @@
 
-# sit725-2021-t2-prac6
+# sit725-2021-t2-prac7
 
 After installing, run the server using
 
