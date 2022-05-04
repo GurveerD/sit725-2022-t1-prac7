@@ -1,5 +1,5 @@
 
-# sit725-2021-t2-prac7
+# TechRev: Find reviews you can trust.
 
 After installing, run the server using
 
