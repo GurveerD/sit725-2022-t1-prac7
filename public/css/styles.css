@@ -14,3 +14,14 @@ border-radius: 40px;
 border: 1px solid rgb(245, 222, 179);
 background-color: rgba(26, 25, 26, 0.94);
 }
+
+.fa {
+    font-size: 100px;
+    cursor: pointer;
+    user-select: none;
+    transition: all ease-in 0.2s;
+  }
+.fa:hover{
+    color: blue;
+    transform: scale(1.1);
+}

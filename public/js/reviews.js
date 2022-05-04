@@ -1,3 +1,6 @@
+// Socket Variable
+var socket = io();
+
 // To check if user is logged in and accordingly display button
 let account;
 checkLogin = () => {
@@ -5,7 +8,6 @@ checkLogin = () => {
   if (account) {
     document.getElementById('reviewBtn').innerHTML = `
       <button type="button" class="btn rounded-circle btn-warning mt-4 px-3 py-1 fs-3" id="addBtn" data-bs-toggle="modal" data-bs-target="#modal">+</button>`;
-    console.log(account.userName);
     var d = new Date();
     document.getElementById('postedBy').value = account.userName;
     document.getElementById('createdAt').value = d.toLocaleDateString();
@@ -48,7 +50,10 @@ loadReviews = () => {
                 <p class="card-text">
                 ${reviews[i].review}
                 </p>
+                <div class="d-flex justify-content-between">
                 <p class="card-text"><small class="text-muted">Posted on: ${reviews[i].createdAt}</small></p>
+                <i onclick="likeBtn(this)" class="fa fa-thumbs-up fs-3"><span id="likes">0</span></i>
+                </div>
               </div>
             </div>
           </div>
@@ -66,6 +71,30 @@ loadReviews = () => {
       alert(error.message);
     });
 };
+var likes;
+var liked;
+//When Like Button is clicked:
+likeBtn = (el) => {
+  if (account) {
+    el.classList.toggle('fa-thumbs-down');
+    likes = document.getElementById('likes').innerHTML;
+    likes = parseInt(likes);
+    if (!liked) {
+      socket.emit('liked', likes,liked);
+      liked = true;
+    } else {
+      socket.emit('liked', likes,liked);
+      liked = false;
+    }
+  } else {
+    alert("You can't like a post without logging in. Please Log in to like it");
+  }
+};
+
+socket.on('update', (likes) => {
+  document.getElementById('likes').innerHTML = likes;
+  console.log('Socket receives');
+});
 
 // On form submit event handler
 document.getElementById('form').onsubmit = (event) => {
